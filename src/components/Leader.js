@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 function getLeader(characters) {
 	let leader = {
 		name: '',
@@ -12,14 +12,16 @@ function getLeader(characters) {
 	});
 	return leader;
 }
-const Leader = props => {
-	const leader = getLeader(props.characters);
-	return (
-		<div className="leader">
-			<span className="name">{leader.score > 0 ? leader.name : 'Leader Name'}</span>
-			<span>Score: {leader.score > 0 ? leader.score : ''}</span>
-		</div>
-	);
-};
+class Leader extends PureComponent {
+	render() {
+		const leader = getLeader(this.props.characters);
+		return (
+			<div className="leader">
+				<span className="name">{leader.score > 0 ? leader.name : 'Leader Name'}</span>
+				<span>Score: {leader.score > 0 ? leader.score : ''}</span>
+			</div>
+		);
+	}
+}
 
 export default Leader;
