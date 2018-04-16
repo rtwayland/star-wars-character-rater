@@ -1,41 +1,29 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { prepData } from './utils/data';
 import Nav from './components/Nav';
 import CharacterList from './components/CharacterList';
 
 class App extends Component {
 	state = {
 		searchValue: '',
-		characters: {
-			1: {
-				id: 1,
-				name: 'Luke Skywalker',
-				films: ['Episode 4', 'Episode 5', 'Episode 6'],
-				upVotes: 0,
-				downVotes: 0
-			},
-			2: {
-				id: 2,
-				name: 'Han Solo',
-				films: ['Episode 4', 'Episode 5', 'Episode 6'],
-				upVotes: 0,
-				downVotes: 0
-			},
-			3: {
-				id: 3,
-				name: 'Leia Organa',
-				films: ['Episode 4', 'Episode 5', 'Episode 6'],
-				upVotes: 0,
-				downVotes: 0
-			},
-			4: {
-				id: 4,
-				name: 'Chewbacca',
-				films: ['Episode 4', 'Episode 5', 'Episode 6'],
-				upVotes: 0,
-				downVotes: 0
-			}
-		}
+		characters: {}
 	};
+
+	componentDidMount() {
+		const requests = [
+			axios.get('https://swapi.co/api/people/?page=1'),
+			axios.get('https://swapi.co/api/people/?page=2'),
+			axios.get('https://swapi.co/api/people/?page=3'),
+			axios.get('https://swapi.co/api/people/?page=4')
+		];
+		axios.all(requests).then(res => {
+			const results = res.reduce((acc, cur) => [...acc, ...cur.data.results], []);
+			const characters = prepData(results);
+			this.setState({ characters });
+		});
+	}
+
 	searchCharacters = e => {
 		const { value: searchValue } = e.target;
 		this.setState({ searchValue });
@@ -62,7 +50,11 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Nav characters={this.state.characters} searchValue={this.state.searchValue} searchCharacters={this.searchCharacters} />
+				<Nav
+					characters={this.state.characters}
+					searchValue={this.state.searchValue}
+					searchCharacters={this.searchCharacters}
+				/>
 				<div className="ui container character-list-container">
 					<CharacterList
 						characters={this.state.characters}
