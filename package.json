@@ -1,0 +1,23 @@
+{
+  "name": "star-wars-character-rater",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.12.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-react": "^0.79.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

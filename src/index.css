@@ -1,0 +1,56 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Avenir;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	z-index: 1;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-color: #1c1e22;
+	padding: 10px 0;
+}
+.nav-content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.leader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: #fee233;
+}
+
+.leader .name {
+	font-weight: bold;
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+.character-list-container {
+	margin-top: 85px;
+}
+
+.character-list {
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+}
+
+.filter-container {
+	display: flex;
+	flex-flow: wrap;
+	justify-content: center;
+}
+
+.episode-filter-checkbox {
+	display: flex;
+	padding: 10px;
+	flex-direction: column;
+	align-items: center;
+}
