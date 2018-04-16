@@ -17,6 +17,17 @@ nav {
 .nav-content {
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
+}
+
+.nav-link, .nav-link:hover {
+	color: #fee233;
+	padding: 0 10px;
+}
+
+.nav-link.active {
+	font-weight: bold;
+	text-decoration: underline;
 }
 
 .leader {
@@ -36,10 +47,16 @@ nav {
 	margin-top: 85px;
 }
 
-.character-list {
+.character-list, .leader-board {
 	display: flex;
 	justify-content: center;
 	padding-top: 20px;
+}
+.leader-board-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* padding-top: 20px; */
 }
 
 .filter-container {
