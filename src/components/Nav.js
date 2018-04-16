@@ -5,7 +5,7 @@ import Search from './Search';
 const Nav = (props) => (
 	<nav className="nav-content">
 		<Leader />
-		<Search />
+		<Search searchValue={props.searchValue} searchCharacters={props.searchCharacters} />
 	</nav>
 );
 
