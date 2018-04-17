@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import { prepData } from './utils/data';
 import Nav from './components/Nav';
@@ -51,31 +50,22 @@ class App extends Component {
 	};
 	render() {
 		return (
-			<Router>
-				<div>
-					<Nav
+			<div>
+				<Nav
+					characters={this.state.characters}
+					searchValue={this.state.searchValue}
+					searchCharacters={this.searchCharacters}
+				/>
+				<div className="ui container character-list-container">
+					<CharacterList
 						characters={this.state.characters}
 						searchValue={this.state.searchValue}
-						searchCharacters={this.searchCharacters}
+						incrementUpVotes={this.incrementUpVotes}
+						incrementDownVotes={this.incrementDownVotes}
+						deleteCharacter={this.deleteCharacter}
 					/>
-					<div className="ui container character-list-container">
-						<Route
-							exact
-							path="/"
-							render={() => (
-								<CharacterList
-									characters={this.state.characters}
-									searchValue={this.state.searchValue}
-									incrementUpVotes={this.incrementUpVotes}
-									incrementDownVotes={this.incrementDownVotes}
-									deleteCharacter={this.deleteCharacter}
-								/>
-							)}
-						/>
-						<Route path="/leaders" render={() => <LeaderBoard characters={this.state.characters} />} />
-					</div>
 				</div>
-			</Router>
+			</div>
 		);
 	}
 }
