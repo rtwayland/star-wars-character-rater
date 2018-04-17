@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import { prepData } from './utils/data';
 import Nav from './components/Nav';
 import CharacterList from './components/CharacterList';
+import LeaderBoard from './components/LeaderBoard';
 
 class App extends Component {
 	state = {
@@ -49,22 +51,31 @@ class App extends Component {
 	};
 	render() {
 		return (
-			<div>
-				<Nav
-					characters={this.state.characters}
-					searchValue={this.state.searchValue}
-					searchCharacters={this.searchCharacters}
-				/>
-				<div className="ui container character-list-container">
-					<CharacterList
+			<Router>
+				<div>
+					<Nav
 						characters={this.state.characters}
 						searchValue={this.state.searchValue}
-						incrementUpVotes={this.incrementUpVotes}
-						incrementDownVotes={this.incrementDownVotes}
-						deleteCharacter={this.deleteCharacter}
+						searchCharacters={this.searchCharacters}
 					/>
+					<div className="ui container character-list-container">
+						<Route
+							exact
+							path="/"
+							render={() => (
+								<CharacterList
+									characters={this.state.characters}
+									searchValue={this.state.searchValue}
+									incrementUpVotes={this.incrementUpVotes}
+									incrementDownVotes={this.incrementDownVotes}
+									deleteCharacter={this.deleteCharacter}
+								/>
+							)}
+						/>
+						<Route path="/leaders" render={() => <LeaderBoard characters={this.state.characters} />} />
+					</div>
 				</div>
-			</div>
+			</Router>
 		);
 	}
 }

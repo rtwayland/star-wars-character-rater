@@ -9,6 +9,7 @@ const CharacterList = props => (
 				<Character
 					key={character.name}
 					{...character}
+					allowRating
 					incrementUpVotes={props.incrementUpVotes}
 					incrementDownVotes={props.incrementDownVotes}
 					deleteCharacter={props.deleteCharacter}

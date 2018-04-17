@@ -22,12 +22,16 @@ const Character = props => (
 			</div>
 		</div>
 		<div className="extra content">
-			<RatingButtons
-				characterId={props.id}
-				incrementUpVotes={props.incrementUpVotes}
-				incrementDownVotes={props.incrementDownVotes}
-				deleteCharacter={props.deleteCharacter}
-			/>
+			{props.allowRating ? (
+				<RatingButtons
+					characterId={props.id}
+					incrementUpVotes={props.incrementUpVotes}
+					incrementDownVotes={props.incrementDownVotes}
+					deleteCharacter={props.deleteCharacter}
+				/>
+			) : (
+				<div>Score: {props.upVotes - props.downVotes}</div>
+			)}
 		</div>
 	</div>
 );
