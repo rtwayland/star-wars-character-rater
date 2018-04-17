@@ -12,14 +12,11 @@ function getLeader(characters) {
 	});
 	return leader;
 }
-const Leader = props => {
-	const leader = getLeader(props.characters);
-	return (
+const Leader = props => (
 		<div className="leader">
-			<span className="name">{leader.score > 0 ? leader.name : 'Leader Name'}</span>
-			<span>Score: {leader.score > 0 ? leader.score : ''}</span>
+			<span className="name">Han Solo</span>
+			<span>Score: 20</span>
 		</div>
 	);
-};
 
 export default Leader;

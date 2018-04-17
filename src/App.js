@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Nav from './components/Nav';
-import CharacterList from './components/CharacterList';
 
 class App extends Component {
 	state = {
@@ -62,16 +61,11 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Nav characters={this.state.characters} searchValue={this.state.searchValue} searchCharacters={this.searchCharacters} />
-				<div className="ui container character-list-container">
-					<CharacterList
-						characters={this.state.characters}
-						searchValue={this.state.searchValue}
-						incrementUpVotes={this.incrementUpVotes}
-						incrementDownVotes={this.incrementDownVotes}
-						deleteCharacter={this.deleteCharacter}
-					/>
-				</div>
+				<Nav
+					searchValue={this.state.searchValue}
+					searchCharacters={this.searchCharacters}
+				/>
+				<div className="ui container character-list-container">Character List</div>
 			</div>
 		);
 	}
