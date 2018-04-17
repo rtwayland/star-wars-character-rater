@@ -62,7 +62,11 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Nav characters={this.state.characters} searchValue={this.state.searchValue} searchCharacters={this.searchCharacters} />
+				<Nav
+					characters={this.state.characters}
+					searchValue={this.state.searchValue}
+					searchCharacters={this.searchCharacters}
+				/>
 				<div className="ui container character-list-container">
 					<CharacterList
 						characters={this.state.characters}
