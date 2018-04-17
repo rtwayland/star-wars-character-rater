@@ -3,7 +3,7 @@ function getLeader(characters) {
 	let sortedCharacters = Object.values(characters).sort(
 		(a, b) => b.upVotes - b.downVotes - (a.upVotes - a.downVotes)
 	);
-	let leader = sortedCharacters[0];
+	let leader = sortedCharacters[0] || { name: '', score: 0 };
 	return { name: leader.name, score: leader.upVotes - leader.downVotes };
 }
 const Leader = props => {
