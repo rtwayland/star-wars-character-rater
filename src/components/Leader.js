@@ -1,16 +1,10 @@
 import React, { PureComponent } from 'react';
 function getLeader(characters) {
-	let leader = {
-		name: '',
-		score: 0
-	};
-	Object.values(characters).forEach(character => {
-		if (character.upVotes - character.downVotes > leader.score) {
-			leader.name = character.name;
-			leader.score = character.upVotes - character.downVotes;
-		}
-	});
-	return leader;
+	let sortedCharacters = Object.values(characters).sort(
+		(a, b) => b.upVotes - b.downVotes - (a.upVotes - a.downVotes)
+	);
+	let leader = sortedCharacters[0];
+	return { name: leader.name, score: leader.upVotes - leader.downVotes };
 }
 class Leader extends PureComponent {
 	render() {
