@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
 function getLeader(characters) {
 	let leader = {
 		name: '',
@@ -24,4 +26,8 @@ class Leader extends PureComponent {
 	}
 }
 
-export default Leader;
+const mapStateToProps = state => ({
+	characters: state.characters
+});
+
+export default connect(mapStateToProps)(Leader);

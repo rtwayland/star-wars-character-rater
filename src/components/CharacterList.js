@@ -1,21 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Character from './Character';
 
 const CharacterList = props => (
 	<div className="character-list ui cards">
 		{Object.values(props.characters)
 			.filter(character => character.name.toLowerCase().includes(props.searchValue.toLowerCase()))
-			.map(character => (
-				<Character
-					key={character.name}
-					{...character}
-					allowRating
-					incrementUpVotes={props.incrementUpVotes}
-					incrementDownVotes={props.incrementDownVotes}
-					deleteCharacter={props.deleteCharacter}
-				/>
-			))}
+			.map(character => <Character key={character.name} {...character} allowRating />)}
 	</div>
 );
 
-export default CharacterList;
+const mapStateToProps = state => ({
+	characters: state.characters,
+	searchValue: state.searchValue
+});
+
+export default connect(mapStateToProps)(CharacterList);

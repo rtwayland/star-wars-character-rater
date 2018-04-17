@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { searchCharacters } from '../actions';
 
 class Search extends Component {
 	shouldComponentUpdate(nextProps) {
@@ -18,4 +20,8 @@ class Search extends Component {
 	}
 }
 
-export default Search;
+const mapStateToProps = state => ({
+	searchValue: state.searchValue
+});
+
+export default connect(mapStateToProps, { searchCharacters })(Search);

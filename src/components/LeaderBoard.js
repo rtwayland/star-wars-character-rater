@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Character from './Character';
 
 const LeaderBoard = props => {
@@ -20,4 +21,8 @@ const LeaderBoard = props => {
 	);
 };
 
-export default LeaderBoard;
+const mapStateToProps = state => ({
+	characters: state.characters
+});
+
+export default connect(mapStateToProps)(LeaderBoard);

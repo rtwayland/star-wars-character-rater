@@ -13,8 +13,8 @@ const Nav = props => (
 				Leader Board
 			</NavLink>
 		</div>
-		<Leader characters={props.characters} />
-		<Search searchValue={props.searchValue} searchCharacters={props.searchCharacters} />
+		<Leader />
+		<Search />
 	</nav>
 );
 

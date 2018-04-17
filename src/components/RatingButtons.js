@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { incrementUpVotes, incrementDownVotes, deleteCharacter } from '../actions';
 
 const RatingButtons = props => (
 	<div className="ui three buttons">
@@ -14,4 +16,4 @@ const RatingButtons = props => (
 	</div>
 );
 
-export default RatingButtons;
+export default connect(null, { incrementUpVotes, incrementDownVotes, deleteCharacter })(RatingButtons);
