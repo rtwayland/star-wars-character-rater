@@ -1,18 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import Context from '../context';
 import Character from './Character';
 
 const CharacterList = props => (
-	<div className="character-list ui cards">
-		{Object.values(props.characters)
-			.filter(character => character.name.toLowerCase().includes(props.searchValue.toLowerCase()))
-			.map(character => <Character key={character.name} {...character} allowRating />)}
-	</div>
+	<Context.Consumer>
+		{context => (
+			<div className="character-list ui cards">
+				{Object.values(context.state.characters)
+					.filter(character => character.name.toLowerCase().includes(context.state.searchValue.toLowerCase()))
+					.map(character => <Character key={character.name} {...character} allowRating />)}
+			</div>
+		)}
+	</Context.Consumer>
 );
 
-const mapStateToProps = state => ({
-	characters: state.characters,
-	searchValue: state.searchValue
-});
-
-export default connect(mapStateToProps)(CharacterList);
+export default CharacterList;

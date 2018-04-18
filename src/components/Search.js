@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { searchCharacters } from '../actions';
+import Context from '../context';
 
 class Search extends Component {
-	shouldComponentUpdate(nextProps) {
-		return nextProps.searchValue !== this.props.searchValue;
-	}
 	render() {
 		return (
-			<div className="ui input">
-				<input
-					type="text"
-					value={this.props.searchValue}
-					onChange={this.props.searchCharacters}
-					placeholder="Character Name"
-				/>
-			</div>
+			<Context.Consumer>
+				{context => (
+					<div className="ui input">
+						<input
+							type="text"
+							value={context.state.searchValue}
+							onChange={context.searchCharacters}
+							placeholder="Character Name"
+						/>
+					</div>
+				)}
+			</Context.Consumer>
 		);
 	}
 }
 
-const mapStateToProps = state => ({
-	searchValue: state.searchValue
-});
-
-export default connect(mapStateToProps, { searchCharacters })(Search);
+export default Search;
