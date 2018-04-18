@@ -12,7 +12,7 @@ class Search extends Component {
 				<input
 					type="text"
 					value={this.props.searchValue}
-					onChange={this.props.searchCharacters}
+					onChange={(e) => this.props.searchCharacters(e.target.value)}
 					placeholder="Character Name"
 				/>
 			</div>
