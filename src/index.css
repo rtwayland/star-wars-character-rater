@@ -72,7 +72,7 @@ nav {
 	align-items: center;
 }
 
-.center-text {
+#center {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
