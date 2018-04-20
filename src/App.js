@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './components/Nav';
+import CharacterList from './components/CharacterList';
 
 class App extends Component {
 	state = {
