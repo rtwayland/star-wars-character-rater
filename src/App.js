@@ -5,14 +5,16 @@ class App extends Component {
 	state = {
 		searchValue: ''
 	};
-	searchCharacters = e => {
-		const { value: searchValue } = e.target;
+	setCharacterName = searchValue => {
 		this.setState({ searchValue });
 	};
 	render() {
 		return (
 			<div>
-				<Nav searchValue={this.state.searchValue} searchCharacters={this.searchCharacters} />
+				<Nav
+					searchValue={this.state.searchValue}
+					setCharacterName={this.setCharacterName}
+				/>
 			</div>
 		);
 	}

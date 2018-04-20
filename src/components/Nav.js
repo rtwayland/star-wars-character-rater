@@ -4,8 +4,8 @@ import Search from './Search';
 
 const Nav = (props) => (
 	<nav className="nav-content">
-		<Leader />
-		<Search searchValue={props.searchValue} searchCharacters={props.searchCharacters} />
+		<Leader name={props.searchValue} />
+		<Search searchValue={props.searchValue} setCharacterName={props.setCharacterName} />
 	</nav>
 );
 
