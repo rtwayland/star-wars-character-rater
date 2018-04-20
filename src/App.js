@@ -8,8 +8,8 @@ class App extends Component {
 	render() {
 		return (
 			<div id="center">
-				<p>Up Votes: 0</p>
-				<p>Down Votes: 0</p>
+				<p>Up Votes: -</p>
+				<p>Down Votes: -</p>
 				<div className="buttons">
 					<button
 						className="ui basic green button"
