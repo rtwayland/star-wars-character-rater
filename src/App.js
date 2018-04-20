@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 class App extends Component {
 	state = {
-		points: 0
+		upVotes: 0,
+		downVotes: 0
 	};
 	render() {
 		return (
 			<div id="center">
-				<p>Points: 0</p>
+				<p>Up Votes: 0</p>
+				<p>Down Votes: 0</p>
 				<div className="buttons">
 					<button
 						className="ui basic green button"
