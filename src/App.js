@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import { prepData } from './utils/data';
@@ -6,78 +6,93 @@ import Nav from './components/Nav';
 import CharacterList from './components/CharacterList';
 import LeaderBoard from './components/LeaderBoard';
 
-class App extends Component {
-	state = {
-		searchValue: '',
-		characters: {}
-	};
+function App(props) {
+	const charactersFromStorage = sessionStorage.getItem('characters');
+	const initialCharacters = charactersFromStorage
+		? JSON.parse(charactersFromStorage)
+		: {};
+	const [searchValue, setSearchValue] = useState('');
+	const [characters, setCharacters] = useState(initialCharacters);
 
-	componentDidMount() {
-		const requests = [
-			axios.get('https://swapi.co/api/people/?page=1'),
-			axios.get('https://swapi.co/api/people/?page=2'),
-			axios.get('https://swapi.co/api/people/?page=3'),
-			axios.get('https://swapi.co/api/people/?page=4')
-		];
-		axios.all(requests).then(res => {
-			const results = res.reduce((acc, cur) => [...acc, ...cur.data.results], []);
-			const characters = prepData(results);
-			this.setState({ characters });
-		});
-	}
+	useEffect(() => {
+		if (!Object.keys(characters).length) {
+			const requests = [
+				axios.get('https://swapi.co/api/people/?page=1'),
+				axios.get('https://swapi.co/api/people/?page=2'),
+				axios.get('https://swapi.co/api/people/?page=3'),
+				axios.get('https://swapi.co/api/people/?page=4')
+			];
+			axios.all(requests).then(res => {
+				const results = res.reduce(
+					(acc, cur) => [...acc, ...cur.data.results],
+					[]
+				);
+				const characters = prepData(results);
+				sessionStorage.setItem('characters', JSON.stringify(characters));
+				setCharacters(characters);
+			});
+		}
+	}, []);
 
-	searchCharacters = e => {
+	const searchCharacters = e => {
 		const { value: searchValue } = e.target;
-		this.setState({ searchValue });
+		setSearchValue(searchValue);
 	};
-	incrementUpVotes = id => {
-		const characters = {
-			...this.state.characters,
-			[id]: { ...this.state.characters[id], upVotes: this.state.characters[id].upVotes + 1 }
+	const incrementUpVotes = id => {
+		const updatedCharacters = {
+			...characters,
+			[id]: {
+				...characters[id],
+				upVotes: characters[id].upVotes + 1
+			}
 		};
-		this.setState({ characters });
+		setCharacters(updatedCharacters);
 	};
-	incrementDownVotes = id => {
-		const characters = {
-			...this.state.characters,
-			[id]: { ...this.state.characters[id], downVotes: this.state.characters[id].downVotes + 1 }
+	const incrementDownVotes = id => {
+		const updatedCharacters = {
+			...characters,
+			[id]: {
+				...characters[id],
+				downVotes: characters[id].downVotes + 1
+			}
 		};
-		this.setState({ characters });
+		setCharacters(updatedCharacters);
 	};
-	deleteCharacter = id => {
-		const characters = { ...this.state.characters };
-		delete characters[id];
-		this.setState({ characters });
+	const deleteCharacter = id => {
+		const updatedCharacters = { ...characters };
+		delete updatedCharacters[id];
+		setCharacters(updatedCharacters);
 	};
-	render() {
-		return (
-			<Router>
-				<div>
-					<Nav
-						characters={this.state.characters}
-						searchValue={this.state.searchValue}
-						searchCharacters={this.searchCharacters}
+	return (
+		<Router>
+			<div>
+				<Nav
+					characters={characters}
+					searchValue={searchValue}
+					searchCharacters={searchCharacters}
+				/>
+				<div className="ui container character-list-container">
+					<Route
+						exact
+						path="/"
+						render={() => (
+							<CharacterList
+								characters={characters}
+								searchValue={searchValue}
+								incrementUpVotes={incrementUpVotes}
+								incrementDownVotes={incrementDownVotes}
+								deleteCharacter={deleteCharacter}
+							/>
+						)}
 					/>
-					<div className="ui container character-list-container">
-						<Route
-							exact
-							path="/"
-							render={() => (
-								<CharacterList
-									characters={this.state.characters}
-									searchValue={this.state.searchValue}
-									incrementUpVotes={this.incrementUpVotes}
-									incrementDownVotes={this.incrementDownVotes}
-									deleteCharacter={this.deleteCharacter}
-								/>
-							)}
-						/>
-						<Route path="/leaders" render={() => <LeaderBoard characters={this.state.characters} />} />
-					</div>
+					<Route
+						path="/leaders"
+						render={() => <LeaderBoard characters={characters} />}
+					/>
 				</div>
-			</Router>
-		);
-	}
+			</div>
+		</Router>
+	);
 }
 
 export default App;
