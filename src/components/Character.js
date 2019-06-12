@@ -2,7 +2,7 @@ import React from 'react';
 import RatingButtons from './RatingButtons';
 
 const Character = props => (
-	<div className="character-card card">
+	<div className="character-card card" data-testid={`character-card-${props.id}`}>
 		<div className="content">
 			<div className="header">{props.name}</div>
 			<div className="meta">
